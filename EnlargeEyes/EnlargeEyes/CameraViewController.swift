@@ -25,7 +25,12 @@ class CameraViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        setupCamera()
+        AVCaptureDevice.requestAccess(for: AVMediaType.video) { [weak self] response in
+            if response {
+                self?.setupCamera()
+            }
+        }
+        
     }
     
     private func setupCamera() {
